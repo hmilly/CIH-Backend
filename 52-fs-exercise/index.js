@@ -1,3 +1,6 @@
+const fs = require('fs');
+
+
 /**
  * Exercise 1
  *
@@ -11,6 +14,21 @@
  * 2. if path is incorrect, log an error "No such file or directory"
  */
 
+const createJsonFileWithContent = (data, fileName) => {
+    if (!fileName) {
+        return console.log("File name is missing")
+    }
+    if (fs.existsSync("./data/")) {
+        console.log("created file")
+        return fs.writeFileSync(`./data/${fileName}.json`, `${JSON.stringify(data)}`, (err, data) => {
+            if (err) throw err
+            console.log(data);
+        })
+    } else {
+        return console.log("No such file or directory")
+    }
+}
+
 /**
  * Exercise 2
  *
@@ -23,6 +41,16 @@
  * 1. if path is incorrect, log an error "No such file or directory"
  */
 
+
+const readJsonFile = (fileName) => {
+    if (fs.existsSync(`./data/${fileName}.json`)) {
+        const fileData = fs.readFileSync(`./data/${fileName}.json`, 'utf8', 'r')
+        console.log(JSON.parse(fileData))
+    } else {
+        console.log("No such file or directory")
+    }
+}
+
 /**
  * Exercise 3
  *
@@ -31,12 +59,26 @@
  * and add it the file {./data/[fileName].json} synchronously.
  */
 
+const updateFileWithContent = (data, fileName) => {
+
+    fs.appendFileSync(`./data/${fileName}.json`, `\n${JSON.stringify(data)}`, (err, data) => {
+        if (err) throw err
+        console.log("updated")
+    })
+}
+
 /**
  * Exercise 4
  *
  * create a function {getFileSize} that will take {fileName} as argument and return
  * file size in bytes.
  */
+
+const getFileSize = (fileName) => {
+    const stats = fs.statSync(`${fileName}`)
+    console.log(`${stats["size"]} bytes`)
+}
+
 
 /**
  * Exercise 5
@@ -49,6 +91,14 @@
  * if you get an error, log error message
  */
 
+const cloneJsonFile = (src, destination) => {
+
+    fs.copyFile(`${src}`, `${destination}`, (err) => {
+        if (err) console.log("Oh no, cloning error!")
+    })
+}
+
+
 /**
  * Exercise 6
  *
@@ -60,3 +110,16 @@
  * if you get an error, log error message
  */
 
+const deleteFile = (src) => {
+    fs.unlink(`${src}`, (err) => {
+        if (err) console.log("Oh no, deletion error!")
+    })
+}
+
+
+ //createJsonFileWithContent({ "name": "m" }, "tester")
+ // readJsonFile("tester")
+// updateFileWithContent({ "data": "Updated Data" }, "tester")
+ // getFileSize("./data/tester.json")
+//cloneJsonFile("./data/tester.json", "./data/testfile2.json")
+ //deleteFile("./data/tester.json")
