@@ -1,6 +1,4 @@
 const fs = require('fs');
-
-
 /**
  * Exercise 1
  *
@@ -14,18 +12,12 @@ const fs = require('fs');
  * 2. if path is incorrect, log an error "No such file or directory"
  */
 
-const createJsonFileWithContent = (data, fileName) => {
-    if (!fileName) {
-        return console.log("File name is missing")
-    }
-    if (fs.existsSync("./data/")) {
-        console.log("created file")
-        return fs.writeFileSync(`./data/${fileName}.json`, `${JSON.stringify(data)}`, (err, data) => {
-            if (err) throw err
-            console.log(data);
-        })
-    } else {
-        return console.log("No such file or directory")
+const createJsonFileWithContent  = (data, fileName) => {
+    if (!fileName) {console.log("File name is missing")}
+    try {
+        fs.writeFileSync(`./data/${fileName}.json`, JSON.stringify(data))
+    } catch (error) {
+        console.log(error, "No such file or directory");
     }
 }
 
@@ -43,11 +35,11 @@ const createJsonFileWithContent = (data, fileName) => {
 
 
 const readJsonFile = (fileName) => {
-    if (fs.existsSync(`./data/${fileName}.json`)) {
-        const fileData = fs.readFileSync(`./data/${fileName}.json`, 'utf8', 'r')
+   try {
+        const fileData = fs.readFileSync(`./data/${fileName}.json`, 'utf8')
         console.log(JSON.parse(fileData))
-    } else {
-        console.log("No such file or directory")
+    } catch (error) {
+        console.log(error, "No such file or directory")
     }
 }
 
@@ -60,11 +52,11 @@ const readJsonFile = (fileName) => {
  */
 
 const updateFileWithContent = (data, fileName) => {
-
-    fs.appendFileSync(`./data/${fileName}.json`, `\n${JSON.stringify(data)}`, (err, data) => {
-        if (err) throw err
-        console.log("updated")
-    })
+    try {
+        fs.appendFileSync(`./data/${fileName}.json`, `\n${JSON.stringify(data)}`)
+    } catch {
+        console.log(error, "updated")
+    }
 }
 
 /**
@@ -78,8 +70,6 @@ const getFileSize = (fileName) => {
     const stats = fs.statSync(`${fileName}`)
     console.log(`${stats["size"]} bytes`)
 }
-
-
 /**
  * Exercise 5
  *
@@ -92,12 +82,10 @@ const getFileSize = (fileName) => {
  */
 
 const cloneJsonFile = (src, destination) => {
-
     fs.copyFile(`${src}`, `${destination}`, (err) => {
         if (err) console.log("Oh no, cloning error!")
     })
 }
-
 
 /**
  * Exercise 6
@@ -116,10 +104,9 @@ const deleteFile = (src) => {
     })
 }
 
-
- //createJsonFileWithContent({ "name": "m" }, "tester")
- // readJsonFile("tester")
-// updateFileWithContent({ "data": "Updated Data" }, "tester")
+//createJsonFileWithContent({ "name": "m" }, "tester")
+// readJsonFile("tester")
+ //updateFileWithContent({ "data": "Updated Data" }, "tester")
  // getFileSize("./data/tester.json")
 //cloneJsonFile("./data/tester.json", "./data/testfile2.json")
- //deleteFile("./data/tester.json")
+deleteFile("./data/test.json")
