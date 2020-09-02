@@ -18,57 +18,58 @@ const users = [
 ];
 
 
-
-
-
-
 const http = require('http')
 const fs = require('fs')
 
-const handleRequest = (request, response) => {
 
+const createServer = (req, res) => {
 
+  if (req.url === '/') {
+    res.writeHead(200, {
+      'Content-Type': 'text/plain'
+    });
+    res.write(`Hello`);
+    res.end();
 
-
-
-
-
-
-
-  if (request.url === '/') {
-    return response.end('<html><p>Hello</></p></html>')
-  }
-
-  if (request.url === '/home') {
-    fs.readFileSync('./index.html', 'utf8', (error, data) => {
-      if (error) {
-        response.end('oops')
+  } else if (req.url === '/home') {
+    res.writeHead(200, {
+      'Content-Type': 'text/html'
+    });
+    fs.readFile('./index.html', 'utf8', (err, data) => {
+      if (err) {
+        res.writeHead(404);
+        res.write('Whoops! File not found!');
       } else {
-        response.end(data)
+        res.write(data);
       }
+      res.end()
     })
+
+  } else if (req.url === '/api/users') {
+    res.writeHead(200, {
+      'Content-Type': 'text/html'
+    });
+    res.write(`${users.map(u => u.name)}`);
+    res.end();
+
+    
+  } 
+  // else if (req.url === `/api/user/${num}`) {
+  //       res.writeHead(200, {
+  //     'Content-Type': 'application/json'
+  //   });
+  //   let userWithId = user.find(u => u.id === num)
+  //   let data = {user: userWithId}
+  //   res.end(JSON.stringify(data))
+
+
+  // } 
+
+  else {
+    res.end('Error')
   }
-  
-  if (request.url === '/api/users') {
-    return response.end(`
-    <ul>
-    ${users.map(u =>
-      `<li>${u}</li>`
-    )}
-    </ul>
-    `)
-  }
-  
-  if (request.url === '/') {
-    return response.end('<html><p>Hello</></p></html>')
-  }
-  
-  response.end('<html><h2>Error</h2></html>')
+
 }
 
-
-const server = http.createServer(handleRequest)
-
-server.listen(2000);
-
-
+const server = http.createServer(createServer)
+server.listen(3000)
