@@ -1,6 +1,6 @@
 // Exercise 1
 describe("createJsonFileWithContent", () => {
-  afterEach(() => {
+  beforeEach(() => {
     const file = readJsonFile("test");
     file && fs.unlinkSync("./data/test.json");
   });

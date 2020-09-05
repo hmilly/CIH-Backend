@@ -17,13 +17,11 @@ const users = [
   },
 ];
 
-
 const http = require('http')
 const fs = require('fs')
 
 
-const createServer = (req, res) => {
-
+const createServer = () => http.createServer((req, res) => {
   if (req.url === '/') {
     res.writeHead(200, {
       'Content-Type': 'text/plain'
@@ -47,29 +45,28 @@ const createServer = (req, res) => {
 
   } else if (req.url === '/api/users') {
     res.writeHead(200, {
-      'Content-Type': 'text/html'
+      'Content-Type': 'application/json'
     });
-    res.write(`${users.map(u => u.name)}`);
+    let eachUser = users.map(u => u)
+    eachUser = JSON.stringify(eachUser)
+    res.write(`${eachUser}`);
     res.end();
+  }
 
-    
-  } 
-  // else if (req.url === `/api/user/${num}`) {
-  //       res.writeHead(200, {
-  //     'Content-Type': 'application/json'
-  //   });
-  //   let userWithId = user.find(u => u.id === num)
-  //   let data = {user: userWithId}
-  //   res.end(JSON.stringify(data))
-
-
-  // } 
+  else if (users.map(u => `/api/user/${u.id}` === req.url)) {
+    res.writeHead(200, {
+      'Content-Type': 'application/json'
+    });
+    let user = users[parseInt(req.url.slice(-1)) - 1]
+    user = JSON.stringify(user)
+    res.write(`${user}`)
+    res.end()
+  }
 
   else {
     res.end('Error')
   }
 
-}
+})
 
-const server = http.createServer(createServer)
-server.listen(3000)
+const server = createServer()
