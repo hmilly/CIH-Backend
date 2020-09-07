@@ -1,4 +1,4 @@
-{
+
     this.i = 0;
 
     this.add = function(i){ 
@@ -26,4 +26,4 @@
         this.i= 0;
         return result
 }
-}
+

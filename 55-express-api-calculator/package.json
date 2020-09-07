@@ -11,13 +11,17 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@testing-library/dom": "^7.2.0",
+		"@testing-library/dom": "^7.24.1",
 		"concat": "^1.0.3",
-		"jest": "^25.1.0",
+		"jest": "^26.4.2",
 		"nodemon": "^2.0.4"
 	},
 	"dependencies": {
+		"bufferutil": "^4.0.1",
+		"canvas": "^2.6.1",
 		"express": "^4.17.1",
-		"node-fetch-polyfill": "^2.0.6"
+		"jsdom": "^16.4.0",
+		"node-fetch-polyfill": "^2.0.6",
+		"utf-8-validate": "^5.0.2"
 	}
 }

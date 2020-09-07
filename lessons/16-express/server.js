@@ -61,7 +61,7 @@ app.get("/directories/:id", (req, res) => {
 
     if (files.length === 0) {
       pageContent += "oops we got no content here";
-    }
+    }cd
 
     files.forEach((file) => {
       const aTag = a(file, `/directories/${req.params.id}/files/${file}`);
