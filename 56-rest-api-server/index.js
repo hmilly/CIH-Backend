@@ -11,23 +11,23 @@ app.use(express.json());
 
 app.get("/users", (req, res) => {
     const users = JSON.parse(fs.readFileSync(`./db/users.json`, "utf-8"))
-    res.send(users);
+    res.status(200).send(users);
     return
 })
 
 
 // POST - adds a new user. As a response returns new user.
 
-app.post("/users", async (req, res) => {
+app.post("/users", (req, res) => {
     let users = JSON.parse(fs.readFileSync(`./db/users.json`, "utf-8"))
     try {
-        users = [...users, { ...req.body }]
+        users = [...users, { id: (users.length + 2), ...req.body }]
         fs.writeFileSync(`./db/users.json`, JSON.stringify(users))
     }
     catch (error) {
         console.log(error)
     }
-    res.send(req.body);
+    res.status(200).send(req.body);
     return
 })
 
@@ -39,7 +39,7 @@ app.get("/user/:id", (req, res) => {
     const addr = `./db/users.json`
     const allUsers = JSON.parse(fs.readFileSync(addr, "utf-8"))
     const user = allUsers.find(u => u.id === parseInt(req.params.id))
-    res.send(user);
+    res.status(200).send(user);
     return
 })
 
@@ -47,31 +47,30 @@ app.get("/user/:id", (req, res) => {
 
 app.patch("/user/:id", (req, res) => {
     const addr = `./db/users.json`
-    const allUsers = JSON.parse(fs.readFileSync(addr, "utf-8"))
-    let updatedUser
-    allUsers.map(u => {
-        if (u.id === parseInt(req.params.id)){
-        u = { ...req.body }
-        updatedUser = u
-    }})
-    console.log("updatedU", updatedUser)
-    const updateDb = [...allUsers]
-    fs.writeFileSync(addr, JSON.stringify(updateDb))
-    res.setHeader("Content-type", "application/json")
-    res.status(200).send(updatedUser);
+    let allUsers = JSON.parse(fs.readFileSync(addr, "utf-8"))
+    let user
+    allUsers.find(u => {
+        if (u.id === parseInt(req.params.id))
+            u = { id: u.id, ...req.body }
+        user = u
+
+    })
+    fs.writeFileSync(addr, JSON.stringify([...allUsers]))
+    res.status(200).send(user)
     return
 })
+
 
 // // DELETE - removes an existing user by id. As a response returns id of removed user.
 
 app.delete("/user/:id", (req, res) => {
+    const addr = `./db/users.json`
     let allUsers = JSON.parse(fs.readFileSync(addr, "utf-8"))
-    allUsers.map(u => {
-        if (u.id === parseInt(req.params.id)){
-            destroyDirectory(req.params.id)
-    }})
-    fs.writeFileSync(addr, JSON.stringify(allUsers))
-    res.setHeader("Content-type", "application/json")
+    allUsers.splice(allUsers
+        .indexOf(allUsers
+            .find(u => u.id === parseInt(req.params.id)
+            )), 1)
+    fs.writeFileSync(addr, JSON.stringify([...allUsers]))
     res.status(200).send(req.params.id);
     return
 })
@@ -81,94 +80,86 @@ app.delete("/user/:id", (req, res) => {
 
 // // GET - Returns all orders.
 
+// // Endpoint - /orders?userId=:id
+
+// GET - Returns all orders by user id.
+
+app.get("/orders", (req, res) => {
+    let allOrders = JSON.parse(fs.readFileSync("./db/orders.json", "utf-8"))
+    if (!req.query.userId) {
+        res.status(200).send(allOrders);
+        return
+    } else {
+        let orders = allOrders.filter(o => o.userId.match(req.query.userId))
+        console.log(orders)
+        res.status(200).send(orders);
+        return
+    }
+})
+
+
 app.get("/orders", (req, res) => {
     const orders = fs.readFileSync("./db/orders.json", "utf-8")
-    res.send( orders );
+    res.status(200).send(orders);
     return
 })
 
 // // POST - adds a new order. As a response returns a new order.
 
 app.post("/orders", (req, res) => {
-    const orders = JSON.parse(fs.readFileSync("./db/orders.json", "utf-8"))
-
+    let orders = JSON.parse(fs.readFileSync("./db/orders.json", "utf-8"))
     try {
-    orders = [...orders, req.body]
-    fs.writeFileSync("./db/orders.json", JSON.stringify(orders))
+        orders = [...orders, { id: (orders.length + 1), ...req.body }]
+        fs.writeFileSync("./db/orders.json", JSON.stringify(orders))
     } catch (err) {
         console.log(err)
     }
-    res.send( newOrder );
+    res.status(200).send(req.body);
     return
 })
-
-
-
-
-// // Endpoint - /orders?userId=:id
-
-// // GET - Returns all orders by user id.
-
-// app.get("/orders?userId=:id", (req, res) => {
-
-//     const oAddr = `./db/orders.json`;
-//     const orders = JSON.parse(fs.readFileSync(oAddr, "utf-8"))
-
-//     res.setHeader("Content-type", "application/json")
-//     res.status(200).send( orders );
-//     return
-// })
-
-
 
 
 // // Endpoint - /order/:id
 
 // // GET - Returns an order.
 
-app.get("/order:id", (req, res) => {
+app.get("/order/:id", async (req, res) => {
     const oAddr = `./db/orders.json`;
     const allOrders = JSON.parse(fs.readFileSync(oAddr, "utf-8"))
     const order = allOrders.find(o => o.id === parseInt(req.params.id))
-    res.send( order);
+    res.status(200).send(order);
     return
 })
 
 // // PATCH - updates an existing order by id. As a response returns modified order.
 
-// app.patch("/order:id", (req, res) => {
-
-//     const oAddr = `./db/orders.json`;
-//     let order = JSON.parse(fs.readFileSync(oAddr, "utf-8"))
-//     order = {
-//         id: 1,
-//         userId: 4,
-//         productName: "orange",
-//         quantity: 2
-//     }
-//    fs.writeFileSync(oAddr, JSON.stringify(order))
-//     res.setHeader("Content-type", "application/json")
-//     res.status(200).send(order );
-//     return
-// })
+app.patch("/order/:id", (req, res) => {
+    const oAddr = `./db/orders.json`;
+    let orders = JSON.parse(fs.readFileSync(oAddr, "utf-8"))
+    let order
+    orders.find(o => {
+        if (o.id === parseInt(req.params.id))
+            o = { id: o.id, ...req.body }
+        order = o
+    })
+    fs.writeFileSync(oAddr, JSON.stringify([...orders]))
+    res.status(200).send(order)
+    return
+})
 
 
 // // DELETE - removes an existing order by id. As a response returns id of deleted order.
 
-// app.delete("/orders:id", (req, res) => {
-
-//     const oAddr = `./db/orders.json`;
-//     res.setHeader("Content-type", "application/json")
-//     res.status(200).send(req.params.id);
-//     return
-//})
+app.delete("/order/:id", (req, res) => {
+    const oAddr = `./db/orders.json`;
+    let orders = JSON.parse(fs.readFileSync(oAddr, "utf-8"))
+    orders.splice(orders
+        .indexOf(orders
+            .find(o => o.id === parseInt(req.params.id)
+            )), 1)
+    fs.writeFileSync(oAddr, JSON.stringify([...orders]))
+    res.status(200).send(req.params.id);
+    return
+})
 
 app.listen(3001)
-
-
-// router.delete('/:id', function (req, res) {
-//     User.findByIdAndRemove(req.params.id, function (err, user) {
-//       if (err) return res.status(500).send("There was a problem deleting the user.");
-//       res.status(200).send("User: "+ user.name +" was deleted.");
-//     });
-//   });

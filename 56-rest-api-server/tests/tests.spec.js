@@ -95,7 +95,7 @@ describe("Endpoint - /orders", () => {
   });
 
   test("should add a new order to DB and return added order on POST request", async () => {
-    const oldOrders = JSON.parse(fs.readFileSync("./db/users.json"));
+    const oldOrders = JSON.parse(fs.readFileSync("./db/orders.json"));
 
     const fetchedData = await fetch(`${URL}/orders`, {
       method: "POST",
@@ -109,7 +109,7 @@ describe("Endpoint - /orders", () => {
       }),
     }).then((res) => res.json());
 
-    const newOrders = JSON.parse(fs.readFileSync("./db/users.json"));
+    const newOrders = JSON.parse(fs.readFileSync("./db/orders.json"));
 
     expect(fetchedData.productName).toEqual(
       newOrders[newOrders.length - 1].productName
@@ -120,10 +120,10 @@ describe("Endpoint - /orders", () => {
 
 describe("Endpoint - /orders?userId=:id", () => {
   test("should return all orders for selected user on GET request", async () => {
-    const orders = fs.readFileSync("./db/orders.json");
+    const orders = JSON.parse(fs.readFileSync("./db/orders.json"));
     const selectedId = orders[0].id;
-    const ordersByUserIdFs = data.filter(
-      (order) => order.userId === selectedId
+    const ordersByUserIdFs = orders.filter(
+      (order) => parseInt(order.userId) === selectedId
     );
 
     const ordersByUserId = await fetch(
