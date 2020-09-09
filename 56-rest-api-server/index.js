@@ -45,18 +45,16 @@ app.get("/user/:id", (req, res) => {
 
 // // PATCH - updates an existing user by id. As a response returns new user.
 
-app.patch("/user/:id", (req, res) => {
-    const addr = `./db/users.json`
-    let allUsers = JSON.parse(fs.readFileSync(addr, "utf-8"))
-    let user
-    allUsers.find(u => {
-        if (u.id === parseInt(req.params.id))
-            u = { id: u.id, ...req.body }
-        user = u
 
-    })
-    fs.writeFileSync(addr, JSON.stringify([...allUsers]))
-    res.status(200).send(user)
+app.patch("/user/:id", (req, res) => {
+    const allUsers = JSON.parse(fs.readFileSync(`./db/users.json`, "utf-8"))
+    let toEdit = allUsers.splice(allUsers
+        .indexOf(allUsers
+            .find(u => u.id === parseInt(req.params.id)
+            )), 1)
+    toEdit = { id: (allUsers.length + 2), ...req.body }
+    fs.writeFileSync(`./db/users.json`, JSON.stringify([...allUsers, { id: toEdit.id, ...req.body }]))
+    res.status(200).send(toEdit)
     return
 })
 
@@ -91,7 +89,6 @@ app.get("/orders", (req, res) => {
         return
     } else {
         let orders = allOrders.filter(o => o.userId.match(req.query.userId))
-        console.log(orders)
         res.status(200).send(orders);
         return
     }
@@ -134,16 +131,14 @@ app.get("/order/:id", async (req, res) => {
 // // PATCH - updates an existing order by id. As a response returns modified order.
 
 app.patch("/order/:id", (req, res) => {
-    const oAddr = `./db/orders.json`;
-    let orders = JSON.parse(fs.readFileSync(oAddr, "utf-8"))
-    let order
-    orders.find(o => {
-        if (o.id === parseInt(req.params.id))
-            o = { id: o.id, ...req.body }
-        order = o
-    })
-    fs.writeFileSync(oAddr, JSON.stringify([...orders]))
-    res.status(200).send(order)
+    const orders = JSON.parse(fs.readFileSync(`./db/orders.json`, "utf-8"))
+    let toEdit = orders.splice(orders
+        .indexOf(orders
+            .find(o => o.id === parseInt(req.params.id)
+            )), 1)
+    toEdit = { id: (orders.length + 1), ...req.body }
+    fs.writeFileSync(`./db/orders.json`, JSON.stringify([...orders, { id: toEdit.id, ...req.body }]))
+    res.status(200).send(toEdit)
     return
 })
 
