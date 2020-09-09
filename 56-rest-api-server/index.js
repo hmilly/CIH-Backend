@@ -15,7 +15,6 @@ app.get("/users", (req, res) => {
     return
 })
 
-
 // POST - adds a new user. As a response returns new user.
 
 app.post("/users", (req, res) => {
@@ -45,19 +44,17 @@ app.get("/user/:id", (req, res) => {
 
 // // PATCH - updates an existing user by id. As a response returns new user.
 
-
 app.patch("/user/:id", (req, res) => {
     const allUsers = JSON.parse(fs.readFileSync(`./db/users.json`, "utf-8"))
-    let toEdit = allUsers.splice(allUsers
+    let edited = allUsers.splice(allUsers
         .indexOf(allUsers
             .find(u => u.id === parseInt(req.params.id)
             )), 1)
-    toEdit = { id: (allUsers.length + 2), ...req.body }
-    fs.writeFileSync(`./db/users.json`, JSON.stringify([...allUsers, { id: toEdit.id, ...req.body }]))
-    res.status(200).send(toEdit)
+    edited = { id: (allUsers.length + 2), ...req.body }
+    fs.writeFileSync(`./db/users.json`, JSON.stringify([...allUsers, edited]))
+    res.status(200).send(edited)
     return
 })
-
 
 // // DELETE - removes an existing user by id. As a response returns id of removed user.
 
@@ -72,7 +69,6 @@ app.delete("/user/:id", (req, res) => {
     res.status(200).send(req.params.id);
     return
 })
-
 
 // // Endpoint - /orders
 
@@ -94,7 +90,6 @@ app.get("/orders", (req, res) => {
     }
 })
 
-
 app.get("/orders", (req, res) => {
     const orders = fs.readFileSync("./db/orders.json", "utf-8")
     res.status(200).send(orders);
@@ -115,7 +110,6 @@ app.post("/orders", (req, res) => {
     return
 })
 
-
 // // Endpoint - /order/:id
 
 // // GET - Returns an order.
@@ -132,16 +126,15 @@ app.get("/order/:id", async (req, res) => {
 
 app.patch("/order/:id", (req, res) => {
     const orders = JSON.parse(fs.readFileSync(`./db/orders.json`, "utf-8"))
-    let toEdit = orders.splice(orders
+    let edited = orders.splice(orders
         .indexOf(orders
             .find(o => o.id === parseInt(req.params.id)
             )), 1)
-    toEdit = { id: (orders.length + 1), ...req.body }
-    fs.writeFileSync(`./db/orders.json`, JSON.stringify([...orders, { id: toEdit.id, ...req.body }]))
-    res.status(200).send(toEdit)
+    edited = { id: (orders.length + 1), ...req.body }
+    fs.writeFileSync(`./db/orders.json`, JSON.stringify([...orders, edited]))
+    res.status(200).send(edited)
     return
 })
-
 
 // // DELETE - removes an existing order by id. As a response returns id of deleted order.
 
@@ -157,4 +150,4 @@ app.delete("/order/:id", (req, res) => {
     return
 })
 
-app.listen(3001)
+app.listen(3001, () => console.log("ex 56 listening!"))
