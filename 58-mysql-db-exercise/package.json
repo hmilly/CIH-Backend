@@ -14,8 +14,10 @@
     "jest": "^25.1.0"
   },
   "dependencies": {
+    "@mysql/xdevapi": "8.0.21",
     "express": "4.17.1",
-    "mysql": "2.18.1",
-    "node-fetch-polyfill": "^2.0.6"
+    "mysql": "^2.18.1",
+    "node-fetch-polyfill": "^2.0.6",
+    "sequelize": "^6.3.5"
   }
 }

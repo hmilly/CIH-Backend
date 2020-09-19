@@ -15,8 +15,10 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "node-fetch-polyfill": "^2.0.6",
-    "sequelize": "^6.3.4"
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0"
   }
 }
