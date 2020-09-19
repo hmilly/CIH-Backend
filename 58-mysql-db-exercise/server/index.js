@@ -67,7 +67,7 @@ app.get("/api/users", async (req, res) => {
             res.status(200).send(result);
         })
     } else {
-        con.query(`SELECT * FROM users WHERE firstName = ${name}`, (err, result, fields) => {
+        con.query(`SELECT * FROM users WHERE firstName = "${name}"`, (err, result, fields) => {
             if (err) throw err
             res.setHeader("Content-Type", "application/json")
             res.status(200).send(result);
