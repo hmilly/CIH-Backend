@@ -7,8 +7,8 @@ app.use(express.json());
 const con = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'root',
-    database: 'my_db',
+    password: 'rootroot',
+   database: 'my_db'
 });
 
 // connection example using > mysql.createConnection
@@ -28,14 +28,16 @@ const showDatabase = () => {
         console.log(`All databases: ${databases}`);
     })
 }
+//showDatabase()
 
 //create if it doesnt exist 
 const createDatabase = () => {
-    con.query(`CREATE DATABASE IF NOT EXISTS users`, (err, result, fields) => {
+    con.query(`CREATE DATABASE IF NOT EXISTS my_db`, (err, result, fields) => {
         if (err) throw err;
-        console.log(`DATABASE named: users created`);
+        console.log(`DATABASE named: my_db created`);
     })
 }
+//createDatabase()
 
 // show table
 const showTable = () => {
@@ -45,7 +47,7 @@ const showTable = () => {
         console.log(`All tables: ${tables}`);
     })
 }
-
+//showTable()
 // create if it doesnt exist
 const createTable = () => {
     con.query(`CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY,
@@ -54,7 +56,7 @@ const createTable = () => {
         console.log(`TABLE created`);
     })
 }
-
+//createTable()
 // -- --- /api/users --- -- //
 //get all users 
 

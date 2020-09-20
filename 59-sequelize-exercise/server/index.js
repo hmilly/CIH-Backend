@@ -5,18 +5,22 @@ const express = require('express')
 const app = express()
 app.use(express.json());
 
-const seq = new Sequelize('my_db', 'root', 'root', {
+const seq = new Sequelize('my_db', 'root', 'rootroot', {
     host: 'localhost',
     dialect: 'mysql'
 });
 
 
+
 const Order = seq.define("order", {
+    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     productName: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
 }, { timestamps: false })
 
+//Create table if it doesn't exist
+//Order.sync();
 
 const addOrder = async (order) => {
     try {
@@ -25,6 +29,7 @@ const addOrder = async (order) => {
         console.log(err)
     }
 }
+
 
 const getAllOrders = async (idx) => {
     try {
@@ -42,6 +47,8 @@ const getAllOrders = async (idx) => {
     }
 }
 
+
+
 const getAllCustOrders = async (idx) => {
     try {
         return await Order.findAll({
@@ -54,14 +61,18 @@ const getAllCustOrders = async (idx) => {
     }
 }
 
-const updateOrder = async (idx) => {
+const updateOrder = async (name, id) => {
     try {
-        return await Order.update({
-            productName: "orange",
-            where: {
-                id: idx
-            }
-        })
+        return await Order.update({ productName: name },
+            { where: { id: id } })
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const deleteOrder = async (id) => {
+    try {
+        return await Order.destroy({ where: { id: id } })
     } catch (err) {
         console.log(err)
     }
@@ -118,18 +129,18 @@ app.get("/api/order/:id", async (req, res) => {
 
 // // // PATCH - updates an existing user by id. As a response returns new user.
 app.patch("/api/order/:id", async (req, res) => {
-    let id = parseInt(req.params.id)
-    let updated = updateOrder(id)
+    let idx = parseInt(req.params.id)
+    await updateOrder("grapes", idx)
     res.setHeader("Content-Type", "application/json")
-    res.status(200).send(updated);
+    res.status(200).send(JSON.stringify(`order ${idx} Updated!`))
 })
 
 // // // // DELETE - removes an existing user by id. As a response returns id of removed user.
 app.delete("/api/order/:id", async (req, res) => {
     let id = parseInt(req.params.id)
-
+    await deleteOrder(id)
     res.setHeader("Content-Type", "application/json")
-    res.status(200).send(orders);
+    res.status(200).send(JSON.stringify(`id of deleted item: ${id}`))
 
 })
 
