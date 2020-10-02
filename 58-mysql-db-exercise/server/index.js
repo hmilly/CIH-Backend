@@ -1,24 +1,15 @@
 const mysql = require('mysql');
 const express = require('express')
-
 const app = express()
 app.use(express.json());
 
 const con = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'rootroot',
+    password: 'root',
    database: 'my_db'
 });
 
-// connection example using > mysql.createConnection
-// con.connect((err) => {
-//     if (!err){
-//         console.log("connected")
-//     } else {
-//         console.log("not connected", err)
-//     }
-// })
 
 // show databases
 const showDatabase = () => {
@@ -31,13 +22,13 @@ const showDatabase = () => {
 //showDatabase()
 
 //create if it doesnt exist 
-const createDatabase = () => {
-    con.query(`CREATE DATABASE IF NOT EXISTS my_db`, (err, result, fields) => {
+const createDatabase = (dbName) => {
+    con.query(`CREATE DATABASE IF NOT EXISTS ${dbName}`, (err, result, fields) => {
         if (err) throw err;
-        console.log(`DATABASE named: my_db created`);
+        console.log(`DATABASE named: ${dbName} created`);
     })
 }
-//createDatabase()
+//createDatabase(my_db)
 
 // show table
 const showTable = () => {
@@ -49,14 +40,14 @@ const showTable = () => {
 }
 //showTable()
 // create if it doesnt exist
-const createTable = () => {
-    con.query(`CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY,
-        firstName VARCHAR(255), lastName VARCHAR(255), age INT)`, (err, result, fields) => {
+const createTable = (tableName, input) => {
+    con.query(`CREATE TABLE IF NOT EXISTS ${tableName} (${input})`, (err, result, fields) => {
         if (err) throw err;
-        console.log(`TABLE created`);
+        console.log(`TABLE named: ${tableName} created`);
     })
 }
-//createTable()
+//createTable(users, "id INT AUTO_INCREMENT PRIMARY KEY, firstName VARCHAR(255), lastName VARCHAR(255), age INT")
+
 // -- --- /api/users --- -- //
 //get all users 
 
