@@ -1,19 +1,51 @@
-const {userName, pWord} = require("./loginDetails")
-const dataBase = 'test'
+const mongodb = require('mongodb');
+// const {MongoClient} = mongodb;
+const { userName, pWord } = require("./loginDetails")
+
+// const uri = `mongodb+srv://${userName}:${pWord}@cluster0.milx3.mongodb.net/`;
+// const dataBase = "coworking"
+
+// MongoClient.connect(
+//     uri, { useNewUrlParser: true },
+//     (err, client) => {
+//         if (err) console.log("error: ", err)
+//         const db = client.db(dataBase)
+
+//         db.collection('rooms').insertOne({
+//             name: "test"
+//         })
+//     }
+// )
+
+
+
 const MongoClient = require('mongodb').MongoClient;
-const uri = `mongodb+srv://${userName}:${pWord}@cluster0.milx3.mongodb.net/${dataBase}?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${userName}:${pWord}@cluster0.milx3.mongodb.net/coworking?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  console.log("connected")
-  client.close();
-});
+    const collection = client.db("test").collection("rooms");
+    console.log(1, "connected")
 
+    collection.insertOne({
+        name: "test"
+    })
+
+    // collection.find({
+    //     category: "name"
+    // })
+
+    client.close();
+});
 
 
 /**
 /api/rooms
+
+id - ObjectId;
+roomNumber - number;
+equipment - array;
+capacity - int;
+isAvailable - boolean;
 
 GET - select and return all rooms from rooms collection;
 POST - add a new room to rooms collection;
@@ -55,6 +87,12 @@ PUT - update equipment in the room;
 /**
 /api/companies
 
+id - ObjectId;
+
+name - string;
+
+email - string;
+
 GET - select and return all companies from companies collection;
 POST - add a new company to companies collection;
  */
@@ -73,6 +111,14 @@ PUT - update company;
 
 /**
 /api/bookings
+
+id - ObjectId;
+
+companyId: int;
+
+roomId: int;
+
+roomId: int;
 
 GET - return all bookings;
  */
