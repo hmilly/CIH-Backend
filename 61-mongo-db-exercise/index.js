@@ -1,3 +1,17 @@
+const {userName, pWord} = require("./loginDetails")
+const dataBase = 'test'
+const MongoClient = require('mongodb').MongoClient;
+const uri = `mongodb+srv://${userName}:${pWord}@cluster0.milx3.mongodb.net/${dataBase}?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  console.log("connected")
+  client.close();
+});
+
+
+
 /**
 /api/rooms
 
