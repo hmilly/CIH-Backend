@@ -1,41 +1,46 @@
 const mongodb = require('mongodb');
-// const {MongoClient} = mongodb;
 const { userName, pWord } = require("./loginDetails")
 
-// const uri = `mongodb+srv://${userName}:${pWord}@cluster0.milx3.mongodb.net/`;
-// const dataBase = "coworking"
-
-// MongoClient.connect(
-//     uri, { useNewUrlParser: true },
-//     (err, client) => {
-//         if (err) console.log("error: ", err)
-//         const db = client.db(dataBase)
-
-//         db.collection('rooms').insertOne({
-//             name: "test"
-//         })
-//     }
-// )
+const express = require('express');
+const server = express();
 
 
+const { MongoClient } = mongodb;
+const uri = `mongodb+srv://${userName}:${pWord}@cluster0.milx3.mongodb.net/`;
+const dataBase = "coworking"
 
-const MongoClient = require('mongodb').MongoClient;
-const uri = `mongodb+srv://${userName}:${pWord}@cluster0.milx3.mongodb.net/coworking?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-    const collection = client.db("test").collection("rooms");
+MongoClient.connect(
+  uri, { useNewUrlParser: true, useUnifiedTopology: true },
+  (err, client) => {
+    if (err) console.log("error: ", err)
+    const db = client.db(dataBase)
     console.log(1, "connected")
 
-    collection.insertOne({
-        name: "test"
-    })
-
-    // collection.find({
-    //     category: "name"
+    // db.collection('rooms').insertOne({
+    //   id : 1,
+    // name: "lounge"
     // })
 
-    client.close();
-});
+    server.get('/api/rooms', async (req, res) => {
+      const data = await db.collection('rooms').find().toArray()
+      res.send(JSON.stringify(data))
+    })
+
+    server.post('/api/rooms', async (req, res) => {
+      const newRoom = req.body;
+      await db.collection('rooms').insertOne(newRoom)
+      res.send('Added room')
+    })
+  })
+
+
+
+
+
+server.listen(3000, () => {
+  console.log("listening on port 3000")
+})
+//
 
 
 /**
