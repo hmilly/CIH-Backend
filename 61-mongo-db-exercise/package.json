@@ -16,6 +16,7 @@
 		"jest": "^25.1.0"
 	},
 	"dependencies": {
+		"bson": "^4.1.0",
 		"mongodb": "^3.6.2",
 		"node-fetch-polyfill": "^2.0.6"
 	}

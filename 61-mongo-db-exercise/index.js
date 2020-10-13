@@ -17,8 +17,11 @@ MongoClient.connect(
     console.log(1, "connected")
 
     // db.collection('rooms').insertOne({
-    //   id : 1,
-    // name: "lounge"
+    //   id: 3,
+    //   roomNumber: 8,
+    //   equipment: ["bed"],
+    //   capacity: 2,
+    //   isAvailable: false
     // })
 
     server.get('/api/rooms', async (req, res) => {
