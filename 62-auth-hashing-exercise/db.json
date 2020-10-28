@@ -1,5 +1,1 @@
-[
-    { "id": 1, "username": "Alex", "email" : "alex@gmail.com", "password": "" },
-    { "id": 2, "username": "Mary", "email" : "mary@gmail.com", "password": "" },
-    { "id": 3, "username": "Dave", "email" : "dave@gmail.com", "password": "" }
-]
+[{"id":1,"username":"Peter","email":"peter@gmail.com","password":"$2b$10$YtjIDFd1nIODZ2upsgGISOWMQNo21.H3E.ds577Zn0pS5pNjqmg1S"},{"id":2,"username":"Mary","email":"m@gmail.com","password":"$2b$10$HJJC7TcEEG9fY5LxXsxgPulRX8lZX9nmh9rFYx3jo4SpBtJ0tNcKe"},{"id":3,"username":"Dave","email":"d@gmail.com","password":"$2b$10$CNzRsAgvtDmswPLY71bQp.x1aoMQEwxGOF1.Ipw7A/nkis6jTxLSW"},{"id":4,"username":"Andy","email":"a@gmail.com","password":"$2b$10$yuTgVm86.v.3t5sscmA1r.sHrUaMuq0esK/kZWoJUp9hwOYq7Rz9S"}]
