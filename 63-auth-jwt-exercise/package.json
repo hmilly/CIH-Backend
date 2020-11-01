@@ -22,7 +22,9 @@
     "jest": "^25.1.0"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "express": "^4.17.1",
+    "jwt-simple": "^0.5.6",
     "node-fetch-polyfill": "^2.0.6"
   }
 }

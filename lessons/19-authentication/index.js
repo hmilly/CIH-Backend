@@ -61,7 +61,7 @@ app.post("/login", (req, res) => {
     return res.status(403).send("wrong username");
   }
 
-  bcrypt.compare(password, user.password, (err, result) => {
+  bcrypt.compare(password, user.passwordHash, (err, result) => {
     if (err) res.status(403).send("wrong everything");
     else if (result) {
       res

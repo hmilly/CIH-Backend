@@ -16,6 +16,7 @@ const addNewUser = (jsonUser, successCallback) => {
 };
 
 const getUser = (username) => {
+  
   const fileData = fs.readFileSync("./db.txt", { encoding: "utf8" });
 
   const rows = fileData.split("\n");
