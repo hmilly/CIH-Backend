@@ -1,0 +1,10 @@
+include partial
+
+html
+    head
+        title Users
+        script(src="./index.js")
+    body
+        h1(class="big") View all users
+        each user in db
+            +partial(user)

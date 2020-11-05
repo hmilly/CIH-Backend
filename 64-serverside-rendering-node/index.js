@@ -1,26 +1,23 @@
 const express = require("express")
-const fs = require("fs");
-const db = require('./db')
-const fetch = require("node-fetch");
+const db = require('./db.json')
 
 const app = express();
-app.use(express.json());
 
+app.set("view engine", "pug");
+app.use(express.static('scripts'));
 
 app.get("/", (req, res) => {
-    db.getAllPokemon().then(pokemons => {
-
-        res.send(pokemons)
-    })
+  res.render("users", {
+    db
+  })
 })
 
-app.get("/:userId", (req, res) => {
-    const id = req.params.id
-    
-
-})
-
-
+app.get("/user/:id", (req, res) => {
+  db.map(u => {
+    if (u.id === parseInt(req.params.id))
+      res.render("user", u)
+  })
+});
 
 
 app.listen(3000, () => console.log("ex 64 listening!"))
