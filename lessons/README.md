@@ -29,3 +29,21 @@
 [Authentication](https://youtu.be/mrwrSrgg-i4)
 
 [Server Side Rendering](https://youtu.be/wUP76Av-KJU)
+
+[Serverless](https://youtu.be/uyMIqB_L_30)
+
+[Web sockets](https://youtu.be/yPGZfWr-NTU)
+
+[Async JS and Fetch](https://youtu.be/HcA58y5tqTw)
+
+[More Fetching](https://youtu.be/mUtavPMFxJI)
+
+[OOP](https://youtu.be/mzSEH4aFYYE)
+
+[Typescript](https://youtu.be/HIduDzKVBoM)
+
+[Frameworks](https://youtu.be/dcB8JLWaSJQ) - I hate Windows
+
+[React State](https://youtu.be/8GlGftQ_43k)
+
+[React useEffect, custom hooks](https://youtu.be/pSryGLbeDek)
