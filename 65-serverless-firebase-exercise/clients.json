@@ -1,0 +1,26 @@
+[
+    {
+        "firstname": "Boid",
+        "lastname": "Yach",
+        "accnum": 1234,
+        "balance": 10
+    },
+    {
+        "firstname": "Patti",
+        "lastname": "Smitch",
+        "accnum": 5678,
+        "balance": 100
+    },
+    {
+        "firstname": "Royce",
+        "lastname": "Royale",
+        "accnum": 9632,
+        "balance": 2000
+    },
+    {
+        "firstname": "Izzy",
+        "lastname": "Onion",
+        "accnum": 8510,
+        "balance": 9000
+    }
+]
