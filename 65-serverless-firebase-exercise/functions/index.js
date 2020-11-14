@@ -2,6 +2,7 @@ const functions = require("firebase-functions")
 const admin = require("firebase-admin")
 const express = require("express")
 const fba = admin.initializeApp(functions.config().firebase)
+const path = require("path");
 
 
 const app = express();
@@ -82,10 +83,22 @@ deleteData("/api/employee/:id", "employees")
 // / - return HTML file with 2 lists:
 // employees
 // clients
-app.get("/", async (req, res) => {
 
-  
-})
+
+// app.get("/", (req, res) => {
+//   const h = {}
+//   const getd = async (db) => {
+//     const ref = fba.database().ref(db)
+//     const data = await ref.once('value')
+//       .then(snap => snap.val().map(i => `<ul>${JSON.stringify(i)}</ul>`))
+//     h.concat(`<ul>${data}</ul>`)
+//     //res.send(`<ul>${data}</ul>`)
+//     console.log(h)
+//   }
+//   getd("clients")
+//   //getd("employees")
+//   //console.log(html)
+// })
 
 // /client/:id - return HTML with client's details;
 app.get("/client/:id", async (req, res) => {
