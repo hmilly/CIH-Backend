@@ -1,6 +1,6 @@
 const express = require('express')
-const rls = require('readline-sync')
 const app = express()
+const fs = require('fs')
 const http = require('http')
 const server = http.createServer(app)
 const socketIo = require('socket.io')
@@ -12,12 +12,29 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-   console.log("running: ", socket.id)
+    console.log("running")
+
+    socket.on("newUser", (name) => {
+        socket.broadcast.emit("newUser", name)
+    })
 
     socket.on("messageEvent", (obj) => {
-        io.sockets.emit("messageEvent",  obj)
+        io.sockets.emit("messageEvent", obj)
     })
+
+    socket.on('typing', ({name, typing}) => {
+        socket.broadcast.emit('typing', {name, typing})
+    })
+
+    socket.on("closeEvent", (name) => {
+        socket.broadcast.emit("closeEvent", name)
+    })
+
+
+
 })
+
+
 
 
 server.listen(3000, () => console.log('66 listening'))
