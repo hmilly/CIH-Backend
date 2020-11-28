@@ -1,0 +1,7 @@
+[
+    { "stockName": "SPY", "currentPrice": 363.43 },
+    { "stockName": "AMZN", "currentPrice": 0 },
+    { "stockName": "DIS", "currentPrice": 0 },
+    { "stockName": "WMT", "currentPrice": 0 },
+    { "stockName": "TSLA", "currentPrice": 0 }
+  ]

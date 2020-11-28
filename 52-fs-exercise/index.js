@@ -12,6 +12,8 @@ const fs = require('fs');
  * 2. if path is incorrect, log an error "No such file or directory"
  */
 
+ 
+
 const createJsonFileWithContent = (data, fileName) => {
     const filePath = `./data/${fileName}.json`
     if (!fileName) {
