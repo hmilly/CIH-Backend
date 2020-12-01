@@ -1,16 +1,25 @@
 const express = require("express")
-//const transactions = require('./transactions.json')
 const { token } = require('./loginDetails')
 const app = express();
 var request = require('request');
-var WebSocket = require('ws');
 const path = require("path")
+const data = require('./users.json')
+const users = require('./users.json')
+console.log(users)
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+//var WebSocket = require('ws');
 //var ws = new WebSocket('wss://api.tiingo.com/iex');
 
 
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/index.html', {
+        headers: {
+          'data': data
+        }
+    })
 });
 
 // setInterval(() => {
