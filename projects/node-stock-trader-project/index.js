@@ -4,9 +4,14 @@ const { token } = require('./loginDetails')
 const app = express();
 var request = require('request');
 var WebSocket = require('ws');
-var ws = new WebSocket('wss://api.tiingo.com/iex');
+const path = require("path")
+//var ws = new WebSocket('wss://api.tiingo.com/iex');
 
 
+
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
 
 // setInterval(() => {
 //     var requestOptions = {

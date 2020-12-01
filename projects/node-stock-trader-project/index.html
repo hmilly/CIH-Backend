@@ -6,26 +6,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chat</title>
     <style>
+
         body {
             flex-direction: column;
             height: 100vh;
+            flex-basis: 90vw;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-items: stretch;
+            align-items: stretch;
+            border: solid black 1px;
         }
-
+        .stock-main{
+            flex-direction: column;
+            align-items: center;
+            height: 65vh;
+            display: flex;
+            border: solid red 1px;
+        }
+        .users-main{
+            flex-direction: column;
+            height: 30vh;
+            align-items: center;
+            display: flex;
+            border: solid blue 1px;
+        }
     </style>
-
 </head>
 
 <body>
-
+    <div class="main">
+        <div class="stock-main">
+            <div class="stock stock1">
+                <h2></h2>
+                <form class="stock-form">
+                    <p class="stock-name"></p>
+                    <h3 class="stock-price"></h3>
+                    <input class="stock-input" type="number" placeholder="0"> </input>
+                    <button class="buy-btn">Buy</button>
+                    <button class="sell-btn">Sell</button>
+                </form>
+            </div>
+            <div class="stock stock2">
+                <form class="stock-form">
+                    <p class="stock-name"></p>
+                    <h3 class="stock-price"></h3>
+                    <input class="stock-input" type="number" placeholder="0"> </input>
+                    <button class="buy-btn">Buy</button>
+                    <button class="sell-btn">Sell</button>
+                </form>
+            </div>
+            <div class="stock stock3">
+                <form class="stock-form">
+                    <p class="stock-name"></p>
+                    <h3 class="stock-price"></h3>
+                    <input class="stock-input" type="number" placeholder="0"> </input>
+                    <button class="buy-btn">Buy</button>
+                    <button class="sell-btn">Sell</button>
+                </form>
+            </div>
+            <div class="stock stock4">
+                <form class="stock-form">
+                    <p class="stock-name"></p>
+                    <h3 class="stock-price"></h3>
+                    <input class="stock-input" type="number" placeholder="0"> </input>
+                    <button class="buy-btn">Buy</button>
+                    <button class="sell-btn">Sell</button>
+                </form>
+            </div>
+            <div class="stock stock5">
+                <form class="stock-form">
+                    <p class="stock-name"></p>
+                    <h3 class="stock-price"></h3>
+                    <input class="stock-input" type="number" placeholder="0"> </input>
+                    <button class="buy-btn">Buy</button>
+                    <button class="sell-btn">Sell</button>
+                </form>
+            </div>
+        </div>
+        <div class="users-main">
+            <div class="user user1">
+                <h3 class="username"></h3>
+                <p class="user-balance"></p>
+                <div class="users-shares">
+                    <div class="company company1">
+                        <h3 class="company-name"></h3>
+                        <h5 class="quantity"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="user user1">
+                <h3 class="username"></h3>
+                <p class="user-balance"></p>
+                <div class="users-shares">
+                    <div class="company company1">
+                        <h3 class="company-name"></h3>
+                        <h5 class="quantity"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="user user1">
+                <h3 class="username"></h3>
+                <p class="user-balance"></p>
+                <div class="users-shares">
+                    <div class="company company1">
+                        <h3 class="company-name"></h3>
+                        <h5 class="quantity"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script></script>
 <script>
-    
-
-
 
 
 </script>
