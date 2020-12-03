@@ -10,52 +10,53 @@
 <body>
     <div class="main">
         <div class="stock-main">
-            <div class="stock stock1">
-                <h2></h2>
+            <div class="stock">
                 <form class="stock-form">
-                    <p class="stock-name"></p>
-                    <h3 class="stock-price"></h3>
+                    <p class="stock-name">DIS</p>
+                    <h3 class="stock-price stock1">0</h3>
                     <input class="stock-input" type="number" placeholder="0"> </input>
                     <button class="buy-btn">Buy</button>
                     <button class="sell-btn">Sell</button>
                 </form>
             </div>
-            <div class="stock stock2">
+            <div class="stock">
                 <form class="stock-form">
-                    <p class="stock-name"></p>
-                    <h3 class="stock-price"></h3>
+                    <p class="stock-name">WMT</p>
+                    <h3 class="stock-price stock2">0</h3>
                     <input class="stock-input" type="number" placeholder="0"> </input>
                     <button class="buy-btn">Buy</button>
                     <button class="sell-btn">Sell</button>
                 </form>
             </div>
-            <div class="stock stock3">
+
+            <div class="stock">
                 <form class="stock-form">
-                    <p class="stock-name"></p>
-                    <h3 class="stock-price"></h3>
+                    <p class="stock-name">TSLA</p>
+                    <h3 class="stock-price stock3">0</h3>
                     <input class="stock-input" type="number" placeholder="0"> </input>
                     <button class="buy-btn">Buy</button>
                     <button class="sell-btn">Sell</button>
                 </form>
             </div>
-            <div class="stock stock4">
+            <div class="stock">
                 <form class="stock-form">
-                    <p class="stock-name"></p>
-                    <h3 class="stock-price"></h3>
+                    <p class="stock-name">SPY</p>
+                    <h3 class="stock-price stock4">0</h3>
                     <input class="stock-input" type="number" placeholder="0"> </input>
                     <button class="buy-btn">Buy</button>
                     <button class="sell-btn">Sell</button>
                 </form>
             </div>
-            <div class="stock stock5">
+            <div class="stock">
                 <form class="stock-form">
-                    <p class="stock-name"></p>
-                    <h3 class="stock-price"></h3>
+                    <p class="stock-name">AMAZN</p>
+                    <h3 class="stock-price stock5">0</h3>
                     <input class="stock-input" type="number" placeholder="0"> </input>
                     <button class="buy-btn">Buy</button>
                     <button class="sell-btn">Sell</button>
                 </form>
             </div>
+
         </div>
         <div class="users-main">
             <div class="user user1">
@@ -68,29 +69,12 @@
                     </div>
                 </div>
             </div>
-            <div class="user user1">
-                <h3 class="username"></h3>
-                <p class="user-balance"></p>
-                <div class="users-shares">
-                    <div class="company company1">
-                        <h3 class="company-name"></h3>
-                        <h5 class="quantity"></h5>
-                    </div>
-                </div>
-            </div>
-            <div class="user user1">
-                <h3 class="username"></h3>
-                <p class="user-balance"></p>
-                <div class="users-shares">
-                    <div class="company company1">
-                        <h3 class="company-name"></h3>
-                        <h5 class="quantity"></h5>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://localhost:3000"></script>
 <script type="text/javascript" src="/indexPage.js"></script>
 <link rel="stylesheet" type="text/css" href="/indexPage.css">
 </link>

@@ -16,6 +16,10 @@ body {
     border: solid red 1px;
 }
 
+.stock{
+    display: flex;
+    align-items: center;
+}
 .users-main {
     flex-direction: column;
     height: 30vh;

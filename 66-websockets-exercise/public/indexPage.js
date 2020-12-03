@@ -31,6 +31,8 @@ messageForm.addEventListener("submit", (e) => {
         e.target.reset()
     }
 })
+
+
 const userTyping = messageForm.addEventListener("keydown", (e) => {
     typing = true
     socket.emit("typing", { name, typing });
