@@ -16,16 +16,14 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + '/index.html')
 });
 
-let companyData
+var requestOptions = {
+  'url': `https://api.tiingo.com/iex/?tickers=spy,tsla,amzn,wmt,dis&token=${token}`,
+  'headers': {
+    'Content-Type': 'application/json'
+  }
+};
 
-  var requestOptions = {
-    'url': `https://api.tiingo.com/iex/?tickers=spy,tsla,amzn,wmt,dis&token=${token}`,
-    'headers': {
-      'Content-Type': 'application/json'
-    }
-  };
-
-  setInterval(() => {
+const int = () => {
   request(requestOptions,
     function (error, response, body) {
       let obj = []
@@ -42,19 +40,26 @@ let companyData
             "stockName": item.ticker,
             "lastPrice": item.prevClose
           })
+        clearInterval(interval)
         }
       })
       io.on("connection", (socket) => {
         console.log("running!")
-          socket.emit("updateStock", obj)
       })
+      io.sockets.emit("updateStock", obj)
     })
-  }, 5000);
+}
+
+int()
+const interval = setInterval(() => {
+  int()
+}, 5000);
 
 
-
-
-
+io.on("connection", (socket) => {
+  console.log("running!")
+  io.emit("printUsers", users)
+})
 
 
 
