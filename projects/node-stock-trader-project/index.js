@@ -40,7 +40,7 @@ const int = () => {
             "stockName": item.ticker,
             "lastPrice": item.prevClose
           })
-        clearInterval(interval)
+        clearInterval(int)
         }
       })
       io.on("connection", (socket) => {
@@ -50,17 +50,17 @@ const int = () => {
     })
 }
 
-int()
-const interval = setInterval(() => {
-  int()
-}, 5000);
 
 
 io.on("connection", (socket) => {
+  int()
   console.log("running!")
   io.emit("printUsers", users)
 })
 
+// const interval = setInterval(() => {
+//   int()
+// }, 5000);
 
 
 
