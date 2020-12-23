@@ -1,8 +1,8 @@
 [
-    { "stockName": "SPY", "currentPrice": 363.67 },
-    { "stockName": "AMZN", "currentPrice": 151.6 },
-    { "stockName": "DIS", "currentPrice": 147.13 },
-    { "stockName": "WMT", "currentPrice": 151.6 },
-    { "stockName": "TSLA", "currentPrice": 585.76 }
+    { "stockName": "amazon", "currentPrice": 1363.67 },
+    { "stockName": "disney", "currentPrice": 151.6 },
+    { "stockName": "sony", "currentPrice": 72.13 },
+    { "stockName": "tesla", "currentPrice": 651.6 },
+    { "stockName": "walmart", "currentPrice": 285.76 }
   ]
   

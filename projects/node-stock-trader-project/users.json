@@ -9,25 +9,25 @@
         "shareName": "DIS",
         "priceOnPurchase": 585.76,
         "priceOnSell": null,
-        "quantity": 5
+        "quantity": 1
       },
       {
         "shareName": "WMT",
         "priceOnPurchase": 585.76,
         "priceOnSell": null,
-        "quantity": 5
+        "quantity": 2
       },
       {
         "shareName": "TSLA",
         "priceOnPurchase": 585.76,
         "priceOnSell": null,
-        "quantity": 5
+        "quantity": 3
       },
       {
         "shareName": "SPY",
         "priceOnPurchase": 585.76,
         "priceOnSell": null,
-        "quantity": 5
+        "quantity": 4
       },
       {
         "shareName": "AMAZN",
@@ -42,13 +42,75 @@
     "firstName": "dae",
     "lastName": "bay",
     "balance": 2000,
-    "transactions": []
+    "transactions": [
+      {
+        "shareName": "DIS",
+        "priceOnPurchase": 585.76,
+        "priceOnSell": null,
+        "quantity": 0
+      },
+      {
+        "shareName": "WMT",
+        "priceOnPurchase": 585.76,
+        "priceOnSell": null,
+        "quantity": 0
+      },
+      {
+        "shareName": "TSLA",
+        "priceOnPurchase": 585.76,
+        "priceOnSell": null,
+        "quantity": 0
+      },
+      {
+        "shareName": "SPY",
+        "priceOnPurchase": 585.76,
+        "priceOnSell": null,
+        "quantity": 0
+      },
+      {
+        "shareName": "AMAZN",
+        "priceOnPurchase": 585.76,
+        "priceOnSell": null,
+        "quantity": 0
+      }
+    ]
   },
   {
     "id": 3,
     "firstName": "sandy",
     "lastName": "gab",
     "balance": 3698,
-    "transactions": []
+    "transactions": [
+      {
+        "shareName": "DIS",
+        "priceOnPurchase": 585.76,
+        "priceOnSell": null,
+        "quantity": 0
+      },
+      {
+        "shareName": "WMT",
+        "priceOnPurchase": 585.76,
+        "priceOnSell": null,
+        "quantity": 0
+      },
+      {
+        "shareName": "TSLA",
+        "priceOnPurchase": 585.76,
+        "priceOnSell": null,
+        "quantity": 0
+      },
+      {
+        "shareName": "SPY",
+        "priceOnPurchase": 585.76,
+        "priceOnSell": null,
+        "quantity": 0
+      },
+      {
+        "shareName": "AMAZN",
+        "priceOnPurchase": 585.76,
+        "priceOnSell": null,
+        "quantity": 0
+      }
+    ]
   }
 ]
