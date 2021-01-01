@@ -1,16 +1,14 @@
 const socket = io();
-const select = (item) => this.document.querySelector(`.${item}`)
+const select = (item) => document.querySelector(`.${item}`)
 const stockMain = select("stock-main")
 const usersMain = select("users-main")
-
-
 
 
 socket.on("updateStock", (stockData) => {
     //console.log(stockData)
     stockData.map((stock, i) => {
         const stockNum = select(`stock${i + 1}`)
-        
+
         stockNum.innerText =
             `${stock.currentPrice ? stock.currentPrice : stock.lastPrice}`
     })
@@ -80,47 +78,62 @@ addBtns.forEach(btn => btn.addEventListener("click", (e) => {
 }))
 minusBtns.forEach(btn => btn.addEventListener("click", (e) => {
     e.preventDefault();
-    e.path[1].querySelector(".quantity").value--
+    if (e.path[1].querySelector(".quantity").value > 0) {
+        e.path[1].querySelector(".quantity").value--
+    }
+
 }))
-
-
-
-
 
 
 const buyBtns = document.querySelectorAll(".buy-btn")
-buyBtns.forEach(btn => btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const company = btn.parentElement.querySelector(".stock-name").innerText
-    const inputVal = e.path[1].querySelector(".quantity").value
-
-
-
-    const currentPrice = e.path[1].querySelector(".stock-price").innerText
-    console.log(currentPrice)
-    // currentprice.split(".")
-    // curentprice[0]
-
-
-
-console.log(currentPrice)
-if (inputVal > 0) {
-    e.path[1].querySelector(".quantity").value = 0
-    const buyInput = { company, inputVal }
-    console.log(currentUser, buyInput)
-}
-}))
-
-
-
-
-
-
 const sellBtn = document.querySelectorAll(".sell-btn")
-sellBtn.forEach(btn => btn.addEventListener("click", (e) => {
+
+const buySell = (bs) => bs.forEach(btn => btn.addEventListener("click", (e) => {
     e.preventDefault();
-    const inputVal = e.path[1].querySelector(".quantity").value
-    if (inputVal < 0) {
-        e.path[1].querySelector(".quantity").value = 0
+    const stockName = btn.parentElement.querySelector(".stock-name").innerText
+    const buttonName = e.path[0].className
+    //reset form to 0 after selection
+
+    let inputVal = e.path[1].querySelector(".quantity").value
+    inputVal = Number(inputVal)
+    let currentPrice = e.path[1].querySelector(".stock-price").innerText
+    currentPrice = Number(currentPrice)
+    e.path[1].querySelector(".quantity").value = 0
+
+    let buyInput = { stockName, inputVal, currentPrice }
+    //console.log(currentUser, buyInput)
+
+    const equation = inputVal * currentPrice
+    const selectedUser = document.querySelector(".active")
+    const usersStock = selectedUser.querySelectorAll(".shares-div")
+
+    const updateShares = (sign) =>
+        usersStock.forEach(div => {
+
+            if (div.firstElementChild.innerText.includes(stockName)) {
+                let num = Number(div.lastElementChild.innerText)
+                //console.log(num, inputVal, num - inputVal)
+                if (sign === "m" && num - inputVal >= 0) {
+                    currentUser.balance += equation
+                    num -= inputVal
+                    div.lastElementChild.innerText = num
+                } else if (sign === "p") {
+                    currentUser.balance -= equation
+                    num += inputVal
+                    div.lastElementChild.innerText = num
+                }
+                selectedUser.querySelector("p").innerText = (currentUser.balance).toFixed(2)
+            }
+        })
+
+    if (inputVal > 0 && buttonName === "buy-btn") {
+        equation <= currentUser.balance
+            ? updateShares("p")
+            : console.log("Balance too low to purchase stock!")
+    } else if (inputVal > 0 && buttonName === "sell-btn") {
+        updateShares("m")
     }
 }))
+
+buySell(buyBtns)
+buySell(sellBtn)

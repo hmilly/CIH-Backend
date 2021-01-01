@@ -6,34 +6,34 @@
     "balance": 100,
     "transactions": [
       {
-        "shareName": "DIS",
-        "priceOnPurchase": 585.76,
+        "shareName": "Amazon",
+        "priceOnPurchase": 200,
+        "priceOnSell": null,
+        "quantity": 5
+      },
+      {
+        "shareName": "Disney",
+        "priceOnPurchase": 150.02,
         "priceOnSell": null,
         "quantity": 1
       },
       {
-        "shareName": "WMT",
-        "priceOnPurchase": 585.76,
-        "priceOnSell": null,
-        "quantity": 2
-      },
-      {
-        "shareName": "TSLA",
-        "priceOnPurchase": 585.76,
-        "priceOnSell": null,
-        "quantity": 3
-      },
-      {
-        "shareName": "SPY",
-        "priceOnPurchase": 585.76,
+        "shareName": "Sony",
+        "priceOnPurchase": 50,
         "priceOnSell": null,
         "quantity": 4
       },
       {
-        "shareName": "AMAZN",
-        "priceOnPurchase": 585.76,
+        "shareName": "Tesla",
+        "priceOnPurchase": 320,
         "priceOnSell": null,
-        "quantity": 5
+        "quantity": 3
+      },
+      {
+        "shareName": "Walmart",
+        "priceOnPurchase": 400,
+        "priceOnSell": null,
+        "quantity": 2
       }
     ]
   },
@@ -44,34 +44,34 @@
     "balance": 2000,
     "transactions": [
       {
-        "shareName": "DIS",
-        "priceOnPurchase": 585.76,
+        "shareName": "Amazon",
+        "priceOnPurchase": 200,
         "priceOnSell": null,
-        "quantity": 0
+        "quantity": 1
       },
       {
-        "shareName": "WMT",
-        "priceOnPurchase": 585.76,
+        "shareName": "Disney",
+        "priceOnPurchase": 150.02,
         "priceOnSell": null,
-        "quantity": 0
+        "quantity": 1
       },
       {
-        "shareName": "TSLA",
-        "priceOnPurchase": 585.76,
+        "shareName": "Sony",
+        "priceOnPurchase": 50,
         "priceOnSell": null,
-        "quantity": 0
+        "quantity": 1
       },
       {
-        "shareName": "SPY",
-        "priceOnPurchase": 585.76,
+        "shareName": "Tesla",
+        "priceOnPurchase": 320,
         "priceOnSell": null,
-        "quantity": 0
+        "quantity": 1
       },
       {
-        "shareName": "AMAZN",
-        "priceOnPurchase": 585.76,
+        "shareName": "Walmart",
+        "priceOnPurchase": 400,
         "priceOnSell": null,
-        "quantity": 0
+        "quantity": 1
       }
     ]
   },
@@ -82,34 +82,34 @@
     "balance": 3698,
     "transactions": [
       {
-        "shareName": "DIS",
-        "priceOnPurchase": 585.76,
+        "shareName": "Amazon",
+        "priceOnPurchase": 200,
         "priceOnSell": null,
-        "quantity": 0
+        "quantity": 1
       },
       {
-        "shareName": "WMT",
-        "priceOnPurchase": 585.76,
+        "shareName": "Disney",
+        "priceOnPurchase": 150.02,
         "priceOnSell": null,
-        "quantity": 0
+        "quantity": 1
       },
       {
-        "shareName": "TSLA",
-        "priceOnPurchase": 585.76,
+        "shareName": "Sony",
+        "priceOnPurchase": 50,
         "priceOnSell": null,
-        "quantity": 0
+        "quantity": 1
       },
       {
-        "shareName": "SPY",
-        "priceOnPurchase": 585.76,
+        "shareName": "Tesla",
+        "priceOnPurchase": 320,
         "priceOnSell": null,
-        "quantity": 0
+        "quantity": 1
       },
       {
-        "shareName": "AMAZN",
-        "priceOnPurchase": 585.76,
+        "shareName": "Walmart",
+        "priceOnPurchase": 400,
         "priceOnSell": null,
-        "quantity": 0
+        "quantity": 1
       }
     ]
   }

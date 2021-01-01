@@ -1,7 +1,7 @@
 
 body {
     flex-direction: column;
-    height: 95vh;
+    height: 90vh;
     flex-basis: 90vw;
     display: flex;
     justify-items: center;
