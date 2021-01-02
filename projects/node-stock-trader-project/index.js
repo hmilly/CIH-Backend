@@ -71,7 +71,8 @@ const int = () => {
         } else {
           findPrice(item.prevClose)
           clearInterval(interval)
-          //Window.alert("Markets closed for today! Last prices are below :)") 
+  
+          io.emit("closedMarkets", "Markets closed for today! Last prices are below :)")
         }
       })
       io.on("connection", (socket) => {

@@ -3,6 +3,18 @@ const select = (item) => document.querySelector(`.${item}`)
 const stockMain = select("stock-main")
 const usersMain = select("users-main")
 
+const errorMsg = (msg) => {
+    const h4Exists = select("h4")
+    if (!h4Exists) {
+        const h1 = select("main-head")
+        const h4 = document.createElement("h4")
+        h4.classList = "h4"
+        h4.innerText = msg
+        h1.append(h4);
+        setTimeout(() => h4.remove(), 5000
+        )
+    }
+}
 
 socket.on("updateStock", (stockData) => {
     //console.log(stockData)
@@ -12,6 +24,13 @@ socket.on("updateStock", (stockData) => {
         stockNum.innerText =
             `${stock.currentPrice ? stock.currentPrice : stock.lastPrice}`
     })
+})
+
+socket.once("closedMarkets", msg => {
+    const stockHeader = select("stock-main")
+    const h4 = document.createElement("h4")
+    h4.innerText = msg
+    stockHeader.prepend(h4);
 })
 
 let currentUser
@@ -90,6 +109,7 @@ const sellBtn = document.querySelectorAll(".sell-btn")
 
 const buySell = (bs) => bs.forEach(btn => btn.addEventListener("click", (e) => {
     e.preventDefault();
+
     const stockName = btn.parentElement.querySelector(".stock-name").innerText
     const buttonName = e.path[0].className
     //reset form to 0 after selection
@@ -103,9 +123,13 @@ const buySell = (bs) => bs.forEach(btn => btn.addEventListener("click", (e) => {
     let buyInput = { stockName, inputVal, currentPrice }
     //console.log(currentUser, buyInput)
 
+    let usersStock
     const equation = inputVal * currentPrice
     const selectedUser = document.querySelector(".active")
-    const usersStock = selectedUser.querySelectorAll(".shares-div")
+    !selectedUser
+    ? errorMsg("No user selected, please make a selection") 
+    : usersStock = selectedUser.querySelectorAll(".shares-div")
+    
 
     const updateShares = (sign) =>
         usersStock.forEach(div => {
@@ -126,10 +150,14 @@ const buySell = (bs) => bs.forEach(btn => btn.addEventListener("click", (e) => {
             }
         })
 
+
+
+
+
     if (inputVal > 0 && buttonName === "buy-btn") {
         equation <= currentUser.balance
             ? updateShares("p")
-            : console.log("Balance too low to purchase stock!")
+            : errorMsg("Balance too low to purchase stock! Please make another selection")
     } else if (inputVal > 0 && buttonName === "sell-btn") {
         updateShares("m")
     }
